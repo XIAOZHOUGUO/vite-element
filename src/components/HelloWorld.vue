@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { reactive, ref,toRefs,defineProps } from 'vue'
+import { reactive, ref, toRefs } from 'vue'
 import { ElDatePicker, ElButton } from 'element-plus'
 
-defineProps<{ msg: string }>()
+defineProps<{
+  msg: string
+}>()
 
 const count = ref(0)
 
@@ -35,20 +37,50 @@ const state = reactive({
   value: '',
 })
 
-const {disabledDate,shortcuts,value} = {...toRefs(state)}
-
+const { disabledDate, shortcuts, value } = {
+  ...toRefs(state),
+}
 </script>
 
 <template>
-<h1>{{ msg }}</h1><p>Recommended IDE setup:<a href="https://code.visualstudio.com/" target="_blank">VSCode</a>+<a href="https://github.com/johnsoncodehk/volar" target="_blank">Volar</a></p><p>See<code>README.md</code>for more information.</p><p><a href="https://vitejs.dev/guide/features.html" target="_blank">Vite Docs</a>|<a href="https://v3.vuejs.org/" target="_blank">Vue 3 Docs</a></p><el-button type="primary" @click="count++" style="margin-right: 1rem;">count is: {{ count }}</el-button><el-date-picker v-model="value" type="date" placeholder="选择日期" :disabled-date="disabledDate" :shortcuts="shortcuts"></el-date-picker><p>Edit<code>components/HelloWorld.vue</code>to test hot module replacement.</p>
+  <h1>{{ msg }}</h1>
+  <p>
+    Recommended IDE setup:<a
+      href="https://code.visualstudio.com/"
+      target="_blank"
+      >VSCode</a
+    >+<a href="https://github.com/johnsoncodehk/volar" target="_blank">Volar</a>
+  </p>
+  <p>See<code>README.md</code>for more information.</p>
+  <p>
+    <a href="https://vitejs.dev/guide/features.html" target="_blank"
+      >Vite Docs</a
+    >|<a href="https://v3.vuejs.org/" target="_blank">Vue 3 Docs </a>
+  </p>
+  <el-button type="primary" @click="count++" style="margin-right: 1rem;">
+    count is: {{ count }}
+  </el-button>
+  <el-date-picker
+    v-model="value"
+    type="date"
+    placeholder="选择日期"
+    :disabled-date="disabledDate"
+    :shortcuts="shortcuts"
+  >
+  </el-date-picker>
+  <p>
+    Edit
+    <code>components/HelloWorld.vue</code>
+    to test hot module replacement.
+  </p>
 </template>
 
 <style scoped>
-*{
+* {
   font-size: 1.4rem;
 }
 
-h1{
+h1 {
   font-size: 34px;
 }
 

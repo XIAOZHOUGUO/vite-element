@@ -6,7 +6,7 @@ import VitePluginElementPlus from 'vite-plugin-element-plus'
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }: ConfigEnv) => {
   // eg: import.meta.env.VITE_BASE_URL -> process.env.VITE_BASE_URL
-  process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
+  process.env = { ...process.env, ...loadEnv(mode, process.cwd()) }
   return {
     resolve: {
       alias: [
@@ -18,12 +18,8 @@ export default defineConfig(({ mode }: ConfigEnv) => {
     },
     plugins: [
       vue(),
-      // 按需加载样式
+      // 按需加载样式 https://github.com/element-plus/vite-plugin-element-plus
       VitePluginElementPlus({
-        // 如果你需要使用 [component name].scss 源文件，你需要把下面的注释取消掉。
-        // 对于所有的 API 你可以参考 https://github.com/element-plus/vite-plugin-element-plus 的文档注释
-        // useSource 默认 false, 加载 css 文件，为 true 时加载 scss 文件
-        // useSource: true
         format: mode === 'development' ? 'esm' : 'cjs',
       }),
       // @ts-ignore
