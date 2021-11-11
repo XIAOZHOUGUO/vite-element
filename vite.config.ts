@@ -3,6 +3,7 @@ import { vite2Ext } from 'apite'
 import vue from '@vitejs/plugin-vue'
 import { ConfigEnv, defineConfig, loadEnv } from 'vite'
 import VitePluginElementPlus from 'vite-plugin-element-plus'
+import { imgExt, fontExt } from './src/utils/constant'
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }: ConfigEnv) => {
   // eg: import.meta.env.VITE_BASE_URL -> process.env.VITE_BASE_URL
@@ -38,5 +39,27 @@ export default defineConfig(({ mode }: ConfigEnv) => {
         },
       }),
     ],
+    build: {
+      outDir: 'dist', // default: dist
+      assetsDir: 'assets', // default: assets
+      rollupOptions: {
+        output: {
+          chunkFileNames: 'assets/js/[name]-[hash].js',
+          entryFileNames: 'assets/js/[name]-[hash].js',
+          // assetFileNames: 'assets/[ext]/[name]-[hash].[ext]',
+          assetFileNames: chunkInfo => {
+            const start = chunkInfo.name.lastIndexOf('.')
+            const fileExt = chunkInfo.name.substring(start + 1)
+            if (imgExt.includes(fileExt)) {
+              return 'assets/img/[name]-[hash].[ext]'
+            } else if (fontExt.includes(fileExt)) {
+              return 'assets/font/[name]-[hash].[ext]'
+            } else {
+              return 'assets/[ext]/[name]-[hash].[ext]'
+            }
+          },
+        },
+      },
+    },
   }
 })

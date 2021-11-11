@@ -10,7 +10,7 @@ const locale = ZhCn
 
 <template>
   <el-config-provider :locale="locale">
-    <img alt="Vue logo" src="./assets/logo.png" />
+    <img alt="Vue logo" src="@/assets/img/logo.png" />
     <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />
   </el-config-provider>
 </template>
